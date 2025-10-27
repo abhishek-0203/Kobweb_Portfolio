@@ -178,7 +178,7 @@ private val skillCards = listOf(
         title = "Artificial Intelligence & Machine Learning",
         skills = listOf(
             "Strong theoretical understanding of Machine Learning and Deep Learning concepts",
-            "Knowledge of Neural Networks, CNNs, and optimization algorithms (Adam, RMSProp, etc.)",
+            "Knowledge of Neural Networks, CNNs",
             "Hands-on familiarity with Scikit-learn, Pandas, NumPy, and OpenCV",
             "Introduction to TensorFlow and PyTorch frameworks for model development"
         ),
@@ -200,7 +200,7 @@ private val skillCards = listOf(
         title = "UI/UX & Design Collaboration",
         skills = listOf(
             "Composable UI design with accessibility support",
-            "Wireframing in Miro, Figma & design handoff",
+            "Basic knowledge of Figma",
             "Responsive layouts & adaptive theming",
             "Motion, animation & material transitions"
         ),
@@ -222,7 +222,6 @@ private val skillCards = listOf(
         skills = listOf(
             "Prompt Engineering — structured prompt design & chaining",
             "Understanding Agentic AI concepts & reasoning flow",
-            "Building AI Agents in Kotlin using APIs & logic orchestration",
             "Integrating AI workflows for app intelligence & automation"
         ),
         icon = "🤖",
@@ -234,7 +233,6 @@ private val skillCards = listOf(
             "Technical documentation (API specs, design guides)",
             "Markdown, README & codebase documentation",
             "Presentation & stakeholder communication",
-            "Knowledge sharing through tech sessions"
         ),
         icon = "📝",
         color = Colors.Linen

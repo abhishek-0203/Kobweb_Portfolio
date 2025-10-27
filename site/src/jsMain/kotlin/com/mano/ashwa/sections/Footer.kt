@@ -259,7 +259,7 @@ fun ContactUsInput() {
 
                 // local UI feedback and clear fields
                 statusIsError = false
-                statusMessage = "Your email client should now be open to send the message."
+                statusMessage = "Your message has been sent!"
                 firstName = ""
                 lastName = ""
                 subject = ""
