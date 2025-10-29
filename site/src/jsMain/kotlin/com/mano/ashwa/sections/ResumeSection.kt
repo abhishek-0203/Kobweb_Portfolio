@@ -14,9 +14,9 @@ import org.jetbrains.compose.web.dom.H5
 fun ResumeSection() {
     Column(Modifier.gap(1.cssRem).padding(2.cssRem)) {
         // Header
-        SpanText("ASHWANI KUMAR SINGH", Modifier)
+        SpanText("ABHISHEK VERMA", Modifier)
         SpanText("ANDROID TECH LEAD / KMP DEVELOPER", Modifier)
-        SpanText("Bangalore | +91-7349629131 | ashwanisingh8713@gmail.com", Modifier)
+        SpanText("Bangalore | +91-7349629131 |        Fashwanisingh8713@gmail.com", Modifier)
         Row(Modifier.gap(1.cssRem)) {
             SpanText("LinkedIn: ashwanisingh8713")
             SpanText("Github: ashwanisingh8713")

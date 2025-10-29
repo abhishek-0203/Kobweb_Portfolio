@@ -12,7 +12,7 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 
 @InitRoute
 fun initCoverLetterPage(ctx: InitRouteContext) {
-    ctx.data.add(PageLayoutData("Ashwani Cover Letter"))
+    ctx.data.add(PageLayoutData("Abhishek Cover Letter"))
 }
 
 @Page(CoverLetter_Route)

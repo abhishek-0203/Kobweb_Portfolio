@@ -34,7 +34,7 @@ import org.jetbrains.compose.web.dom.Div
 
 @InitRoute
 fun initExperiencesPage(ctx: InitRouteContext) {
-    ctx.data.add(PageLayoutData("Abhishek Skills"))
+    ctx.data.add(PageLayoutData("Abhishek "))
 }
 
 @Page(Experience_Route)

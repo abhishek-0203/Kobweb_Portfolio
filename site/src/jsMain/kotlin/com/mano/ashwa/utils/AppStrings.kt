@@ -1,7 +1,7 @@
 package com.mano.ashwa.utils
 
 object AppStrings {
-    val userName = "Ashwani Kumar Singh"
-    val documentPageTitle = "Resume - Ashwani Kumar Singh"
-    val aboutPageTitle = "About - Ashwani Kumar Singh"
+    val userName = "Abhishek Verma"
+    val documentPageTitle = "Resume - Abhishek Verma"
+    val aboutPageTitle = "About - Abhishek Verma"
 }
