@@ -81,19 +81,19 @@ fun BSHeader(ctx: PageContext) {
         A(href = "/Resume/abhishek_resume.pdf", attrs = {
             // Use the actual resource filename that exists under resources/Resume
             attr("download", "abhishek_resume.pdf")
-            attr("aria-label", "Download ABHISHEK VERMA resume")
+            attr("aria-label", "Download Abhishek Verma resume")
             // Use Bootstrap button classes so the button is visible on the dark navbar
             attr("class", "btn btn-outline-light")
             // Position the anchor to the right/top of the navbar and ensure it's above the navbar
             attr("style", "position:absolute; right:12px; top:12px; z-index:2000;")
         }) {
-            SpanText(
-                "Download Resume",
-                modifier = Modifier.padding(6.px).styleModifier {
-                    // keep small padding but rely on bootstrap for look
-                    property("cursor", "pointer")
-                }
-            )
+//            SpanText(
+//                "Download Resume",
+//                modifier = Modifier.padding(6.px).styleModifier {
+//                    // keep small padding but rely on bootstrap for look
+//                    property("cursor", "pointer")
+//                }
+//            )
         }
     }
 }

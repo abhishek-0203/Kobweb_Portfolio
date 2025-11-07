@@ -73,4 +73,17 @@ object AppStyle : StyleSheet() {
         }
     }
 
+    // White link style with hover color change to LINK_HOVER_COLOR
+    val linkWhite by style {
+        color(Color("#FFFFFF"))
+        property("text-decoration", "none")
+        transitions {
+            properties("color")
+            defaultDuration(.15.s)
+        }
+        hover(self) style {
+            property("color", LINK_HOVER_COLOR)
+        }
+    }
+
 }

@@ -60,6 +60,16 @@ fun PageLayout(ctx: PageContext, content: @Composable ColumnScope.() -> Unit) {
             """.trimIndent()
             document.head?.appendChild(s)
         }
+
+        // Inject download helper JS (forceDownload) once so anchors can call it
+        if (document.getElementById("download-resume-js") == null) {
+            val script = document.createElement("script")
+            script.setAttribute("id", "download-resume-js")
+            script.setAttribute("src", "/download-resume.js")
+            // load asynchronously
+            script.setAttribute("defer", "true")
+            document.head?.appendChild(script)
+        }
     }
 
     Box(

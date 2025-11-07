@@ -120,8 +120,6 @@ fun BannerText(text: String) {
             Column(Modifier.fillMaxWidth()) {
                 // Headline with gradient text
                 SpanText(
-                    //text = "A motivated and quick-learning developer with hands-on experience in modern technologies and a strong desire to build impactful digital solutions. Driven by curiosity, innovation, and continuous growth.",
-                    //text = "A motivated and quick-learning developer passionate about exploring the intersection of AI and creativity, skilled in Kotlin and machine learning, and driven to build innovative, human-centered digital solutions.",
                     text = "A motivated and quick-learning developer passionate about the intersection of AI and software development, continuously learning Kotlin, GoLang and machine learning to create smart and impactful solutions.",
                     modifier = Modifier
                         .fontSize(26.px atBreakpointMd 22.px)

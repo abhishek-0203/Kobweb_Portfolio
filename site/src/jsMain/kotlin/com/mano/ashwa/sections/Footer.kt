@@ -381,17 +381,6 @@ fun QuickInfos() {
                             )
                             })
                 }
-//                A(href = "experiences") {
-//                    SpanText(
-//                        "Experiences",
-//                        modifier = Modifier.padding(5.px)
-//                            .styleModifier {
-//                                property("cursor", "pointer"); property(
-//                                "color",
-//                                "#93C5FD"
-//                            )
-//                            })
-//                }
                 A(href = "project") {
                     SpanText(
                         "Projects",
@@ -404,18 +393,28 @@ fun QuickInfos() {
                             })
                 }
                 // Download CV - adjust href to the real path if different
-                A(href = "/cv.pdf", attrs = {
-                    attr("download", "Abhishek_Verma_CV.pdf")
+                A(href = "/Resume/abhishek_resume.pdf", attrs = {
+                    attr("download", "abhishek_resume.pdf")
                 }) {
-                    SpanText(
-                        "Download CV",
-                        modifier = Modifier.padding(5.px)
-                            .styleModifier {
-                                property("cursor", "pointer"); property(
-                                "color",
-                                "#93C5FD"
-                            )
-                            })
+//                    SpanText(
+//                        "Download Resume",
+//                        modifier = Modifier.padding(5.px)
+//                            .styleModifier {
+//                                property("cursor", "pointer"); property(
+//                                "color",
+//                                "#93C5FD"
+//                            )
+//                            })
+                }
+
+                // Small force-download button that uses the JS helper to fetch and save the file reliably
+                Button(attrs = {
+                    attr("type", "button")
+                    attr("onclick", "if (window.forceDownload) { window.forceDownload('/Resume/abhishek_resume.pdf','abhishek_resume.pdf'); } else { window.open('/Resume/abhishek_resume.pdf','_blank') }; return false;")
+                    attr("style", "margin-left:8px; padding:4px 8px; background:#0f172a; color:#fff; border-radius:6px; border:1px solid #334155;")
+                    attr("aria-label", "Force download resume")
+                }) {
+                    //SpanText("Force Download")
                 }
             }
 
