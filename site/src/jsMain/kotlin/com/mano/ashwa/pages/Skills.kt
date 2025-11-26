@@ -67,7 +67,18 @@ fun SkillPage() {
 
 private val skillCards = listOf(
     SkillData(
-        title = "Kotlin Multiplatform & Android",
+        title = "OOPs",
+        skills = listOf(
+            "Familiar with object-oriented programming (OOP) principles and design patterns",
+            "Experienced in building structured, object-oriented software using class-based architecture, object modeling, and reusable component design ",
+            "Skilled in applying OOP methodologies to improve code organization, scalability, and maintainability"
+    ),
+         icon=" 🌐",
+        color = Colors.LightSalmon
+    ),
+
+    SkillData(
+        title = "Kotlin",
         skills = listOf(
             "Familiar in Kotlin for building Android and web-based applications",
             "Familiar with Jetpack Compose and Compose Multiplatform for responsive UI design",
@@ -80,48 +91,23 @@ private val skillCards = listOf(
         color = Colors.LightBlue
     ),
     SkillData(
-        title = "Architecture & Patterns",
-        skills = listOf(
-            "Clean Architecture & SOLID principles",
-            "MVVM / MVI / Unidirectional data flow",
-            "Coroutines, Flow, and structured concurrency",
-            "Scalable multi-module architecture",
-            "Design Patterns: Repository, Factory, Singleton, Observer, Builder, Strategy, Adapter, Delegate, Mediator"
-        ),
-        icon = "🏗️",
-        color = Colors.LightGoldenRodYellow
-    ),
-    SkillData(
-        title = "Libraries & Integrations",
-        skills = listOf(
-            "Dependency Injection (Hilt, Koin, Dagger)",
-            "Networking with Ktor, Retrofit, GraphQL, WebSocket",
-            "Firebase suite: Auth, Firestore, Messaging, Crashlytics",
-            "Google Ads SDK, Analytics & Payment SDK integrations",
-            "Compose UI tooling, Accompanist, and Coil/Glide"
-        ),
-        icon = "📦",
-        color = Colors.LightGreen
-    ),
-    SkillData(
-        title = "Kobweb Framework",
+        title = "Full Stack Web Developer",
         skills = listOf(
             "Familiar with responsive web apps entirely in Kotlin using Kobweb",
             "Familiar with Compose HTML, Silk styling, and route-based navigation",
             "Creating interactive UI layouts with reusable composables & custom themes",
-            "Integrating APIs, Firebase, and REST endpoints into Kobweb sites",
-            "Deploying Kobweb projects via Gradle & GitHub Pages",
-            "Optimizing SEO, routing, and SSR for Kotlin web apps"
+            "Integrating APIs, and REST endpoints into Kobweb sites",
+            "Deploying Kobweb projects via Render & GitHub Pages",
+
         ),
         icon = "🌐",
         color = Colors.LightSkyBlue
     ),
     SkillData(
-        title = "Backend & Integration",
+        title = "Backend & Microservices",
         skills = listOf(
-            "Familiar with Go (Gin Framework) for RESTful API development",
-            "Understanding of JWT Authentication and secure data handling",
-            "Basic Knowledge of Django for backend web services and API creation",
+            "Familiar with Go for RESTful API development",
+            "Basic Knowledge of Gin for backend web services and API creation",
             "Familiar with API testing tools like Postman and n8n for workflow automation",
             "Version control and collaboration using Git & GitHub"
         ),
@@ -129,36 +115,36 @@ private val skillCards = listOf(
         color = Colors.Lavender
     ),
     SkillData(
-        title = "Debugging & Performance",
+        title = "Soft Skills & Collaboration",
         skills = listOf(
-            "Advanced debugging & log tracing",
-            "Memory, CPU & network profiling",
-            "Startup & frame rendering optimization",
-            "Custom ADB scripts & benchmarking tools",
-            "Crash & ANR analysis with Firebase & Play Console"
+            "Quick learner with strong problem-solving and analytical abilities",
+            "Good communication and teamwork skills for effective collaboration",
+            "Curious and self-motivated with a passion for continuous learning and innovation"
         ),
-        icon = "🔍",
-        color = Colors.MistyRose
+                    icon = "🔍",
+            color = Colors.MistyRose
+
     ),
     SkillData(
-        title = "Testing & Release",
+        title = "Git",
         skills = listOf(
-            "Manual & functional testing for Android modules",
-            "Basic test cases (JUnit, Mockito, Espresso)",
-            "Flow & LiveData reactive stream testing",
-            "Automated builds using GitHub Actions or Jenkins",
-            "Static analysis (Ktlint, Detekt, SonarQube)"
+            "Efficient in creating feature branches, merging changes, and maintaining clean, organized workflows",
+            "Strong control over commit history, including meaningful commits, reverting, and handling previous versions safely",
+            "Skilled in collaborating through pull requests, reviewing code, and managing contributions in team environments",
+            "Ability to identify, understand, and resolve merge conflicts smoothly without breaking the codebase",
+            "Proficient in cloning, pushing, pulling, syncing with GitHub/GitLab, and handling SSH authentication"
         ),
-        icon = "✅",
-        color = Colors.AliceBlue
+        icon="💾",
+        color = Colors.PaleTurquoise
     ),
+
     SkillData(
         title = "Security & Optimization",
         skills = listOf(
-            "App signing, keystore & Play Integrity setup",
-            "Secure API handling with encryption & tokens",
-            "ProGuard/R8 optimization & code obfuscation",
-            "Data privacy (GDPR) & permission audits"
+            "Basic API security and safe handling of sensitive data",
+            "Understanding of authentication concepts like JWT and tokens ",
+            "Knowledge of basic time and space complexity (Big-O)",
+            "Optimized network usage with reduced unnecessary API calls "
         ),
         icon = "🔐",
         color = Colors.PaleGoldenRod
@@ -167,12 +153,11 @@ private val skillCards = listOf(
         title = "Tools & Technologies",
         skills = listOf(
             "IntelliJ IDEA, VS Code, Cursor IDE, and Git for development and version control",
-            "Experience with CI/CD pipelines using GitHub Actions",
             "Familiar with project management tools like Jira and Asana",
             "Knowledge of API testing with Postman and workflow automation with n8n"
         ),
         icon = "🌐",
-        color = Colors.PaleGoldenRod
+        color = Colors.Aqua
     ),
     SkillData(
         title = "Artificial Intelligence & Machine Learning",
@@ -183,7 +168,7 @@ private val skillCards = listOf(
             "Introduction to TensorFlow and PyTorch frameworks for model development"
         ),
         icon = "⚙️",
-        color = Colors.Wheat
+        color = Colors.Pink
     ),
     SkillData(
         title = "Generative AI & Prompt Engineering",
@@ -208,9 +193,10 @@ private val skillCards = listOf(
         color = Colors.MistyRose
     ),
     SkillData(
-        title = "Database & Storage",
+        title = "Database ",
         skills = listOf(
                     "Basic SQL knowledge and relational database concepts",
+                    "Basic NoSQL knowledge and non-relational database concepts",
                     "Experience with JSON-based storage and lightweight backend data structures",
                     "Understanding of Room Database and DataStore integration in Android"
         ),
@@ -237,14 +223,16 @@ private val skillCards = listOf(
         icon = "📝",
         color = Colors.Linen
     ),
-
     SkillData(
-        title = "Soft Skills & Collaboration",
+        title = "Debugging & Performance",
         skills = listOf(
-            "Quick learner with strong problem-solving and analytical abilities",
-            "Good communication and teamwork skills for effective collaboration",
-            "Curious and self-motivated with a passion for continuous learning and innovation"
+            "Reading and understanding error messages/stack traces",
+            "Using logs (print/log statements) to track values and flow",
+            "Using breakpoints and stepping through code in the debugger",
+            "Reproducing the bug consistently before fixing it",
+            "Checking recent code changes (Git diff) to find what broke"
         ),
+
         icon = "👥",
         color = Colors.Linen
     )

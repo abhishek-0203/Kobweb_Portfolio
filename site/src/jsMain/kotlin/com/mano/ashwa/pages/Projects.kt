@@ -68,16 +68,16 @@ fun Projects() {
 
 private val projectCards = listOf(
     ProjectData(
-        name = "DevMatch – Developer–Client Collaboration Platform",
+        name = "DevConnect – (Backend Microservices) Developer–Client Collaboration Platform",
         description = "A Go-based backend platform enabling real-time chat, video calls (WebRTC), and dummy " +
                 "payments for seamless collaboration between developers and clients. Features include secure" +
                 " authentication with role-based access, WebSocket-based chat with message persistence, JSON file-based " +
                 "structured data management, and modular RESTful APIs built using the Gin framework.",
         duration = "March 2025 – October 2025.",
         role = "Backend Developer",
-        technologies = listOf("Go (Gin)", "WebRTC", "WebSocket", "JSON", "Dummy Payments"),
+        technologies = listOf("Golang","Gin", "WebRTC", "WebSocket", "JSON", "Dummy Payments"),
         icon = "\uD83D\uDCBB",
-        color = Colors.Beige
+        color = Colors.Lavender
     ),
     ProjectData(
         name = "Kobweb-Blog  Full-Stack Technical Blogging Platform",
@@ -93,7 +93,7 @@ private val projectCards = listOf(
         description = "Responsive portfolio site with contact form, built and deployed using Kobweb and Compose for Web.",
         duration = "Present",
         role = "Web Developer",
-        technologies = listOf("Kotlin Multiplatform", "Kobweb", "Compose for Web", "Ktor", "MongoDB"),
+        technologies = listOf("Kotlin Multiplatform", "Kobweb", "Compose for Web", "Ktor"),
         icon = "\ud83d\udcbc",
         color = Colors.LightBlue
     ),
@@ -102,7 +102,7 @@ private val projectCards = listOf(
         description = "Implemented very basic User Module API (Login, Registration, Profile).",
         duration = "2023",
         role = "Developer",
-        technologies = listOf("GoLang"),
+        technologies = listOf("GoLang","Gin","JSON"),
         icon = "\u2728",
         color = Colors.LightPink
     )

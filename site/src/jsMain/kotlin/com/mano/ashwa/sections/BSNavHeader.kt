@@ -78,22 +78,24 @@ fun BSHeader(ctx: PageContext) {
         )
 
         // Render an anchor styled as a Bootstrap button and positioned to the right of the navbar.
-        A(href = "/Resume/abhishek_resume.pdf", attrs = {
+        A(href = "/Resume/Abhishek_Verma.pdf", attrs = {
             // Use the actual resource filename that exists under resources/Resume
-            attr("download", "abhishek_resume.pdf")
-            attr("aria-label", "Download Abhishek Verma resume")
+            attr("download", "Abhishek_Verma.pdf")
+            // Use forceDownload helper to reliably fetch and save the file (avoids SPA interception)
+            attr("onclick", "if (window.forceDownload) { window.forceDownload('/Resume/Abhishek_Verma.pdf','Abhishek_Verma.pdf'); } else { window.open('/Resume/Abhishek_Verma.pdf','_blank') }; return false;")
+            attr("aria-label", "Download Abhishek Verma Resume")
             // Use Bootstrap button classes so the button is visible on the dark navbar
             attr("class", "btn btn-outline-light")
             // Position the anchor to the right/top of the navbar and ensure it's above the navbar
             attr("style", "position:absolute; right:12px; top:12px; z-index:2000;")
         }) {
-//            SpanText(
-//                "Download Resume",
-//                modifier = Modifier.padding(6.px).styleModifier {
-//                    // keep small padding but rely on bootstrap for look
-//                    property("cursor", "pointer")
-//                }
-//            )
+            // Visible label so the anchor renders as a button with text
+            SpanText(
+                "Download Resume",
+                modifier = Modifier.padding(6.px).styleModifier {
+                    property("cursor", "pointer")
+                }
+            )
         }
     }
 }

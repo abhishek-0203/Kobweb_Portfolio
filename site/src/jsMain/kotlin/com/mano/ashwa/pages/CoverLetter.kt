@@ -33,9 +33,11 @@ fun CoverLetter() {
         Column(Modifier.gap(16.px), horizontalAlignment = Alignment.Start) {
             SpanText("Dear Hiring Manager,")
 
-            SpanText("I’m Abhishek Verma, a passionate and self-driven Software Developer currently pursuing a Bachelor of Engineering in Information Science at AMC Engineering College, Bangalore. I specialize in Kotlin (Kobweb) for frontend development and Go (Gin Framework) for backend services — building end-to-end applications that blend creativity, functionality, and real-time interactivity.")
+            SpanText("I’m Abhishek Verma, motivated and quick-learning developer passionate about the intersection of AI and software development, continuously learning Kotlin, GoLang and machine learning to create smart and impactful solutions currently pursuing Bachelor of Engineering in Information Science at AMC Engineering College, Bangalore.")
 
-            SpanText("Over time, I’ve developed a deep interest in Agentic AI systems and how intelligent automation can simplify human–computer interaction. My learning journey has been shaped by hands-on project work — from developing DevConnect, a real-time developer–client collaboration platform with chat, video calls, and crypto payments, to building Kobweb_Blog, a full-stack blogging platform with modern UI and backend integration.")
+            SpanText("I specialize in Kotlin for frontend development and Go for backend Microservices — building end-to-end applications that blend creativity, functionality, and real-time interactivity.")
+
+            SpanText("Over time, I’ve developed a deep interest in AI systems and how intelligent automation can simplify human–computer interaction. My learning journey has been shaped by hands-on project work — from developing DevConnect, a real-time developer–client collaboration platform with chat, video calls, and crypto payments, to building Kobweb Blog a full-stack blogging Web Application with modern UI and backend integration.")
 
             SpanText("I enjoy turning ideas into functional, elegant products — whether that’s through clean API design, intuitive interfaces, or AI-powered automation workflows. My projects reflect my focus on modular architecture, efficient data handling, and seamless user experiences.")
 

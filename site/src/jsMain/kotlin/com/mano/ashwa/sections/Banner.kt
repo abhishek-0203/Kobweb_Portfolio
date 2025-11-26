@@ -31,7 +31,7 @@ import org.jetbrains.compose.web.dom.P
 @Composable
 fun Banner() {
     val animatedText = rememberAnimatedText(
-        toRotate = listOf("Android Developer", "Web Developer", "UI/UX Designer"),
+        toRotate = listOf("Full Stack Developer"),
         period = 2000
     )
     SimpleGrid(
@@ -106,10 +106,7 @@ fun BannerText(text: String) {
         ) {
             // SpanText("Constants.LOREM")
         }
-        Row(modifier = buttonStyle.toModifier()) {
-            SpanText("Let's Connect")
-            FaCircleArrowRight()
-        }
+
         // More attractive bio block: a short gradient-highlighted headline followed by a readable paragraph
         Row(
             modifier = Modifier
