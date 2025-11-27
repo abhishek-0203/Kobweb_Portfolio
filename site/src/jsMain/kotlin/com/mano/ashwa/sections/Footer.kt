@@ -407,15 +407,7 @@ fun QuickInfos() {
                             })
                 }
 
-                // Small force-download button that uses the JS helper to fetch and save the file reliably
-                Button(attrs = {
-                    attr("type", "button")
-                    attr("onclick", "if (window.forceDownload) { window.forceDownload('/Resume/Abhishek_Verma.pdf','Abhishek_Verma.pdf'); } else { window.open('/Resume/Abhishek_Verma.pdf','_blank') }; return false;")
-                    attr("style", "margin-left:8px; padding:4px 8px; background:#0f172a; color:#fff; border-radius:6px; border:1px solid #334155;")
-                    attr("aria-label", "Force download resume")
-                }) {
-                    //SpanText("Force Download")
-                }
+
             }
 
             // Start ### Follow Me-------------------------------
@@ -438,39 +430,48 @@ fun QuickInfos() {
                     attrs = {
                         target(ATarget.Blank)
                         attr("rel", "noopener noreferrer")
+                        attr("style", "display:inline-block;margin-right:8px;vertical-align:middle")
                     }
                 ) {
-                    SpanText(
-                        "GitHub",
-                        modifier = Modifier.padding(5.px).styleModifier {
-                            property("color", "#ffffff"); property(
-                            "background-color",
-                            "#0f172a"
-                        ); property("padding", "6px 10px"); property(
-                            "border-radius",
-                            "8px"
-                        ); property("display", "inline-block")
-                        })
+                    // Use an inline SVG data URI so we control colors reliably
+                    val githubSvg = """
+                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+                          <circle cx='12' cy='12' r='12' fill='#181717'/>
+                          <path d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.111.82-.261.82-.58 0-.287-.01-1.04-.016-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.084 1.839 1.24 1.839 1.24 1.07 1.835 2.809 1.305 3.492.998.11-.776.419-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.301 1.23A11.495 11.495 0 0112 5.8c1.02.004 2.046.138 3.003.405 2.291-1.553 3.297-1.23 3.297-1.23.655 1.653.244 2.873.12 3.176.77.84 1.235 1.91 1.235 3.221 0 4.61-2.805 5.625-5.478 5.92.43.372.814 1.103.814 2.222 0 1.603-.014 2.896-.014 3.287 0 .321.216.697.824.579C20.565 21.796 24 17.298 24 12c0-6.627-5.373-11.703-12-11.703z' fill='#ffffff'/>
+                        </svg>
+                    """.trimIndent()
+
+                    Img(
+                        src = "data:image/svg+xml;utf8,${encodeURIComponent(githubSvg)}",
+                        alt = "GitHub",
+                        attrs = {
+                            attr("style", "width:36px;height:36px;display:inline-block;vertical-align:middle;border-radius:8px;background-color:transparent;padding:4px")
+                        }
+                    )
                 }
                 A(
                     href = "https://www.linkedin.com/in/abhishek-verma-196789379/",
                     attrs = {
                         target(ATarget.Blank)
                         attr("rel", "noopener noreferrer")
+                        attr("style", "display:inline-block;vertical-align:middle")
                     }
                 ) {
-                    SpanText(
-                        "Linkedin",
-                        modifier = Modifier.padding(5.px).styleModifier {
-                            property("color", "#ffffff"); property(
-                            "background-color",
-                            "#0f172a"
-                        ); property("padding", "6px 10px"); property(
-                            "border-radius",
-                            "8px"
-                        ); property("display", "inline-block")
-                        })
-            }
+                    val linkedinSvg = """
+                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+                          <circle cx='12' cy='12' r='12' fill='#0077B5'/>
+                          <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.039-1.852-3.039-1.852 0-2.135 1.445-2.135 2.939v5.669H9.349V9h3.414v1.561h.049c.476-.9 1.637-1.852 3.368-1.852 3.6 0 4.266 2.37 4.266 5.455v6.288zM7.119 20.452H3.554V9h3.565v11.452zM5.337 7.433c-1.144 0-2.071-.928-2.071-2.073 0-1.145.927-2.073 2.071-2.073 1.144 0 2.071.928 2.071 2.073 0 1.145-.927 2.073-2.071 2.073z' fill='#ffffff'/>
+                        </svg>
+                    """.trimIndent()
+
+                    Img(
+                        src = "data:image/svg+xml;utf8,${encodeURIComponent(linkedinSvg)}",
+                        alt = "LinkedIn",
+                        attrs = {
+                            attr("style", "width:36px;height:36px;display:inline-block;vertical-align:middle;border-radius:8px;background-color:transparent;padding:4px")
+                        }
+                    )
+                }
         }
     }
 }
