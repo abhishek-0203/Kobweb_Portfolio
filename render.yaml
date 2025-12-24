@@ -4,9 +4,25 @@
 services:
   - type: web
     name: kobweb-portfolio
-    runtime: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
-    envVars:
-      - key: PORT
-        value: "80"
+    runtime: static
+    buildCommand: |
+      # Install Java 17
+      curl -fsSL https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.tar.gz -o jdk.tar.gz
+      tar -xzf jdk.tar.gz
+      export JAVA_HOME=$PWD/jdk-17.0.12
+      export PATH=$JAVA_HOME/bin:$PATH
+      java -version
+      
+      # Build the static site
+      cd site
+      chmod +x ../gradlew
+      ../gradlew kobwebExport -PkobwebReuseServer=false -PkobwebEnv=prod -PkobwebExportLayout=STATIC --no-daemon --stacktrace
+    staticPublishPath: site/build/kobweb/site
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=31536000
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
