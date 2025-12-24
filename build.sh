@@ -1,50 +1,18 @@
 #!/bin/bash
 set -e
 
-echo "=== Kobweb Portfolio - Render Build Script ==="
-
-# Check if Java is available
-if ! command -v java &> /dev/null; then
-    echo "Java not found. Installing..."
-    # Render provides Java, but we ensure it's the right version
-    export JAVA_HOME=/opt/render/project/.jdk
-fi
-
-echo "Java version:"
+echo "=== Installing Java 17 ==="
+curl -fsSL https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.tar.gz -o jdk.tar.gz
+tar -xzf jdk.tar.gz
+export JAVA_HOME=$PWD/jdk-17.0.12
+export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
-# Install Kobweb CLI (needed for export)
-echo "Installing Kobweb CLI..."
-KOBWEB_VERSION="0.9.18"
-if [ ! -f "kobweb/kobweb" ]; then
-    curl -fsSL "https://github.com/nicksay/kobweb-cli-releases/releases/download/v${KOBWEB_VERSION}/kobweb-linux-x64.tar.gz" -o kobweb.tar.gz
-    tar -xzf kobweb.tar.gz
-    rm kobweb.tar.gz
-fi
-export PATH="$PWD/kobweb:$PATH"
-
-echo "Kobweb version:"
-kobweb version || echo "Kobweb CLI installed"
-
-# Navigate to site directory
+echo "=== Building Kobweb Static Site ==="
 cd site
-
-# Clean previous builds
-echo "Cleaning previous builds..."
-../gradlew clean --no-daemon || true
-
-# Export static site for production
-echo "Building static site for production..."
-../gradlew kobwebExport \
-    -PkobwebReuseServer=false \
-    -PkobwebEnv=prod \
-    -PkobwebExportLayout=STATIC \
-    --no-daemon \
-    --stacktrace
+chmod +x ../gradlew
+../gradlew kobwebExport -PkobwebReuseServer=false -PkobwebEnv=prod -PkobwebExportLayout=STATIC --no-daemon --stacktrace
 
 echo "=== Build Complete ==="
-echo "Static files are in: site/build/kobweb/site"
-
-# List the output directory
-ls -la build/kobweb/site/ || echo "Output directory not found - check build logs"
+ls -la build/kobweb/site/
 
