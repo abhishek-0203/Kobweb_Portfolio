@@ -1,62 +1,71 @@
 package com.mano.ashwa.pages
 
-import org.jetbrains.compose.web.css.fr
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import com.mano.ashwa.components.layouts.PageLayoutData
 import com.mano.ashwa.components.widgets.SkillCardView
-import com.mano.ashwa.model.SkillData
-import com.mano.ashwa.navigation.Skill_Route
-import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.core.Page
-import com.varabyte.kobweb.compose.foundation.layout.*
+import com.mano.ashwa.data.SkillsData
+import com.mano.ashwa.navigation.Routes
+import com.mano.ashwa.theme.ThemeState
+import com.mano.ashwa.utils.AppStrings
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.compose.ui.modifiers.*
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.DisplayStyle
-import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.Alignment
-import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.data.add
 import com.varabyte.kobweb.core.init.InitRoute
 import com.varabyte.kobweb.core.init.InitRouteContext
 import com.varabyte.kobweb.core.layout.Layout
+import com.varabyte.kobweb.silk.components.icons.fa.FaCode
+import com.varabyte.kobweb.silk.components.icons.fa.IconSize
+import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.P
+import org.jetbrains.compose.web.dom.Text
 
 @InitRoute
 fun initSkillPage(ctx: InitRouteContext) {
-    ctx.data.add(PageLayoutData("Abhishek Skills"))
+    ctx.data.add(PageLayoutData(AppStrings.SKILLS_PAGE_TITLE))
 }
 
-@Page(Skill_Route)
+@Page(Routes.SKILL)
 @Layout(".components.layouts.PageLayout")
 @Composable
 fun SkillPage() {
-    Box(Modifier.fillMaxWidth().backgroundColor(Colors.Transparent).padding(32.px)) {
-        Column(
-            Modifier.gap(32.px),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SpanText("My Skills", Modifier.fontSize(32.px).fontWeight(FontWeight.Bold).color(Colors.DarkSlateBlue))
+    // Main container
+    Div(attrs = {
+        style {
+            property("width", "100%")
+            property("max-width", "1200px")
+            property("margin", "0 auto")
+            property("padding", "40px 24px")
+        }
+    }) {
+        // Section Header
+        SkillsHeader()
 
-            Div(
-                attrs = Modifier
-                    .fillMaxWidth()
-                    .display(DisplayStyle.Grid)
-                    .gridTemplateColumns {
-                        repeat(4) { minmax(250.px, 1.fr) }
+        // Skills Grid
+        Div(attrs = {
+            style {
+                property("display", "grid")
+                property("grid-template-columns", "repeat(auto-fit, minmax(280px, 1fr))")
+                property("gap", "24px")
+                property("margin-top", "48px")
+            }
+        }) {
+            SkillsData.allSkills.forEachIndexed { index, skill ->
+                // Wrap each card with animation delay
+                Div(attrs = {
+                    style {
+                        property("animation", "fadeInUp 0.6s ease-out ${index * 0.1}s both")
                     }
-                    .gap(32.px)
-                    .toAttrs()
-            ) {
-                skillCards.forEach { card ->
+                }) {
                     SkillCardView(
-                        title = card.title,
-                        skills = card.skills,
-                        icon = card.icon,
-                        color = card.color
+                        title = skill.title,
+                        skills = skill.skills,
+                        icon = skill.icon,
+                        color = skill.color
                     )
                 }
             }
@@ -64,176 +73,93 @@ fun SkillPage() {
     }
 }
 
+@Composable
+private fun SkillsHeader() {
+    val colorMode by ThemeState.colorMode
+    val isDark = colorMode == ColorMode.DARK
 
-private val skillCards = listOf(
-    SkillData(
-        title = "OOPs",
-        skills = listOf(
-            "Familiar with object-oriented programming (OOP) principles and design patterns",
-            "Experienced in building structured, object-oriented software using class-based architecture, object modeling, and reusable component design ",
-            "Skilled in applying OOP methodologies to improve code organization, scalability, and maintainability"
-    ),
-         icon=" 🌐",
-        color = Colors.LightSalmon
-    ),
+    // Theme-aware colors
+    val badgeBg = if (isDark) "rgba(99, 102, 241, 0.15)" else "rgba(99, 102, 241, 0.1)"
+    val badgeBorder = if (isDark) "rgba(99, 102, 241, 0.3)" else "rgba(99, 102, 241, 0.25)"
+    val badgeTextColor = if (isDark) "#818cf8" else "#6366f1"
+    val titleGradient = if (isDark) {
+        "linear-gradient(135deg, #ffffff 0%, #60a5fa 50%, #a78bfa 100%)"
+    } else {
+        "linear-gradient(135deg, #1e293b 0%, #6366f1 50%, #7c3aed 100%)"
+    }
+    val subtitleColor = if (isDark) "#94a3b8" else "#64748b"
 
-    SkillData(
-        title = "Kotlin",
-        skills = listOf(
-            "Familiar in Kotlin for building Android and web-based applications",
-            "Familiar with Jetpack Compose and Compose Multiplatform for responsive UI design",
-            "Familiar with Material Design 3, Navigation Components, and UI theming",
-            "Basic understanding of Kotlin Kobweb framework for full-stack web development",
-            "Knowledge of Coroutines and Flow for managing asynchronous operations",
-            "Skilled in REST API integration, JSON handling, and API debugging"
-        ),
-        icon = "📱",
-        color = Colors.LightBlue
-    ),
-    SkillData(
-        title = "Full Stack Web Developer",
-        skills = listOf(
-            "Familiar with responsive web apps entirely in Kotlin using Kobweb",
-            "Familiar with Compose HTML, Silk styling, and route-based navigation",
-            "Creating interactive UI layouts with reusable composables & custom themes",
-            "Integrating APIs, and REST endpoints into Kobweb sites",
-            "Deploying Kobweb projects via Render & GitHub Pages",
+    // Center aligned header
+    Div(attrs = {
+        style {
+            property("display", "flex")
+            property("flex-direction", "column")
+            property("align-items", "center")
+            property("text-align", "center")
+        }
+    }) {
+        // Badge
+        Div(attrs = {
+            style {
+                property("display", "inline-flex")
+                property("align-items", "center")
+                property("gap", "8px")
+                property("padding", "8px 16px")
+                property("background", badgeBg)
+                property("border", "1px solid $badgeBorder")
+                property("border-radius", "25px")
+                property("margin-bottom", "16px")
+            }
+        }) {
+            FaCode(size = IconSize.SM, modifier = Modifier.styleModifier { property("color", badgeTextColor) })
+            SpanText(
+                "Technical Expertise",
+                modifier = Modifier.styleModifier {
+                    property("color", badgeTextColor)
+                    property("font-size", "14px")
+                    property("font-weight", "500")
+                }
+            )
+        }
 
-        ),
-        icon = "🌐",
-        color = Colors.LightSkyBlue
-    ),
-    SkillData(
-        title = "Backend & Microservices",
-        skills = listOf(
-            "Familiar with Go for RESTful API development",
-            "Basic Knowledge of Gin for backend web services and API creation",
-            "Familiar with API testing tools like Postman and n8n for workflow automation",
-            "Version control and collaboration using Git & GitHub"
-        ),
-        icon = "☁️",
-        color = Colors.Lavender
-    ),
-    SkillData(
-        title = "Soft Skills & Collaboration",
-        skills = listOf(
-            "Quick learner with strong problem-solving and analytical abilities",
-            "Good communication and teamwork skills for effective collaboration",
-            "Curious and self-motivated with a passion for continuous learning and innovation"
-        ),
-                    icon = "🔍",
-            color = Colors.MistyRose
+        // Main Title with gradient
+        H2(attrs = {
+            style {
+                property("font-size", "42px")
+                property("font-weight", "700")
+                property("margin", "0 0 16px")
+                property("background", titleGradient)
+                property("-webkit-background-clip", "text")
+                property("-webkit-text-fill-color", "transparent")
+                property("background-clip", "text")
+            }
+        }) {
+            Text("Skills & Technologies")
+        }
 
-    ),
-    SkillData(
-        title = "Git",
-        skills = listOf(
-            "Efficient in creating feature branches, merging changes, and maintaining clean, organized workflows",
-            "Strong control over commit history, including meaningful commits, reverting, and handling previous versions safely",
-            "Skilled in collaborating through pull requests, reviewing code, and managing contributions in team environments",
-            "Ability to identify, understand, and resolve merge conflicts smoothly without breaking the codebase",
-            "Proficient in cloning, pushing, pulling, syncing with GitHub/GitLab, and handling SSH authentication"
-        ),
-        icon="💾",
-        color = Colors.PaleTurquoise
-    ),
+        // Subtitle
+        P(attrs = {
+            style {
+                property("color", subtitleColor)
+                property("font-size", "18px")
+                property("max-width", "600px")
+                property("margin", "0")
+                property("line-height", "1.6")
+            }
+        }) {
+            Text("A comprehensive toolkit of programming languages, frameworks, and tools I use to build exceptional software solutions.")
+        }
 
-    SkillData(
-        title = "Security & Optimization",
-        skills = listOf(
-            "Basic API security and safe handling of sensitive data",
-            "Understanding of authentication concepts like JWT and tokens ",
-            "Knowledge of basic time and space complexity (Big-O)",
-            "Optimized network usage with reduced unnecessary API calls "
-        ),
-        icon = "🔐",
-        color = Colors.PaleGoldenRod
-    ),
-    SkillData(
-        title = "Tools & Technologies",
-        skills = listOf(
-            "IntelliJ IDEA, VS Code, Cursor IDE, and Git for development and version control",
-            "Familiar with project management tools like Jira and Asana",
-            "Knowledge of API testing with Postman and workflow automation with n8n"
-        ),
-        icon = "🌐",
-        color = Colors.Aqua
-    ),
-    SkillData(
-        title = "Artificial Intelligence & Machine Learning",
-        skills = listOf(
-            "Strong theoretical understanding of Machine Learning and Deep Learning concepts",
-            "Knowledge of Neural Networks, CNNs",
-            "Hands-on familiarity with Scikit-learn, Pandas, NumPy, and OpenCV",
-            "Introduction to TensorFlow and PyTorch frameworks for model development"
-        ),
-        icon = "⚙️",
-        color = Colors.Pink
-    ),
-    SkillData(
-        title = "Generative AI & Prompt Engineering",
-        skills = listOf(
-            "Skilled in Prompt Engineering for AI-driven content creation and problem solving",
-            "Knowledge of LangChain, OpenAI API, and Supabase AI integrations",
-            "Understanding of Agentic AI systems and tool integration for workflow automation",
-            "Experience with generative AI platforms such as ChatGPT, Gemini, and DALL·E"
-        ),
-        icon = "🤖",
-        color = Colors.LightSalmon
-    ),
-    SkillData(
-        title = "UI/UX & Design Collaboration",
-        skills = listOf(
-            "Composable UI design with accessibility support",
-            "Basic knowledge of Figma",
-            "Responsive layouts & adaptive theming",
-            "Motion, animation & material transitions"
-        ),
-        icon = "🎨",
-        color = Colors.MistyRose
-    ),
-    SkillData(
-        title = "Database ",
-        skills = listOf(
-                    "Basic SQL knowledge and relational database concepts",
-                    "Basic NoSQL knowledge and non-relational database concepts",
-                    "Experience with JSON-based storage and lightweight backend data structures",
-                    "Understanding of Room Database and DataStore integration in Android"
-        ),
-        icon = "👥",
-        color = Colors.HoneyDew
-    ),
-    SkillData(
-        title = "AI, Prompting & Agents",
-        skills = listOf(
-            "Prompt Engineering — structured prompt design & chaining",
-            "Understanding Agentic AI concepts & reasoning flow",
-            "Integrating AI workflows for app intelligence & automation"
-        ),
-        icon = "🤖",
-        color = Colors.PaleTurquoise
-    ),
-    SkillData(
-        title = "Documentation & Communication",
-        skills = listOf(
-            "Technical documentation (API specs, design guides)",
-            "Markdown, README & codebase documentation",
-            "Presentation & stakeholder communication",
-        ),
-        icon = "📝",
-        color = Colors.Linen
-    ),
-    SkillData(
-        title = "Debugging & Performance",
-        skills = listOf(
-            "Reading and understanding error messages/stack traces",
-            "Using logs (print/log statements) to track values and flow",
-            "Using breakpoints and stepping through code in the debugger",
-            "Reproducing the bug consistently before fixing it",
-            "Checking recent code changes (Git diff) to find what broke"
-        ),
+        // Decorative line
+        Div(attrs = {
+            style {
+                property("width", "80px")
+                property("height", "4px")
+                property("background", "linear-gradient(90deg, #6366f1, #a855f7)")
+                property("border-radius", "2px")
+                property("margin-top", "24px")
+            }
+        })
+    }
+}
 
-        icon = "👥",
-        color = Colors.Linen
-    )
-)

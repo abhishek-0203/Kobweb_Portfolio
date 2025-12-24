@@ -1,3 +1,5 @@
+@file:Suppress("unused", "NOTHING_TO_INLINE") // These are utility functions for responsive design
+
 package com.mano.ashwa.utils
 
 import androidx.compose.runtime.Composable
@@ -5,72 +7,56 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 
 /**
- * Private utility function to choose between [first] and [other] values based on the current screen [Breakpoint].
- * Both [first] and [other] must have the same type [T].
+ * Selects a value based on the current screen [Breakpoint].
  *
- * @param first The value to be returned if the [comparator] returns true.
- * @param other The value to be returned if the [comparator] returns false.
- * @param comparator The comparison function to determine if [first] or [other] should be returned.
- * @throws IllegalArgumentException if [first] and [other] have different types.
- * @return The value of [first] if [comparator] returns true, otherwise the value of [other].
+ * @param primary The value returned when the breakpoint condition is met.
+ * @param fallback The value returned when the breakpoint condition is not met.
+ * @param condition A predicate that determines which value to return based on the current breakpoint.
+ * @return [primary] if [condition] is true, otherwise [fallback].
  */
+@Suppress("OPT_IN_USAGE")
 @Composable
-private inline fun <T> breakpoint(
-    first: T,
-    other: T,
-    comparator: (Breakpoint) -> Boolean
+private inline fun <T> selectByBreakpoint(
+    primary: T,
+    fallback: T,
+    condition: (Breakpoint) -> Boolean
 ): T {
-    require(first!!::class == other!!::class) { "Arguments must have the same type." }
-    val breakpoint = rememberBreakpoint()
-//    return if (comparator(breakpoint.value)) first else other
-    return if (comparator(breakpoint)) first else other
+    val currentBreakpoint = rememberBreakpoint()
+    return if (condition(currentBreakpoint)) primary else fallback
 }
 
-
 /**
- * Returns the value of [this] if the current screen width is at least [Breakpoint.MD], otherwise returns the value of [other].
+ * Returns [this] value for screens at [Breakpoint.SM] or larger, otherwise returns [fallback].
  *
- * Both [first] and [other] must have the same type [T]
- *
- * @param other The value to be returned if the screen width is less than [Breakpoint.MD].
- * @return The value of [this] if the screen width is at least [Breakpoint.MD], otherwise the value of [other].
+ * Example: `24.px atBreakpointSm 16.px` returns 24px on SM+ screens, 16px on smaller.
  */
 @Composable
-infix fun <T> T.atBreakpointMd(other: T) =
-    breakpoint(this, other) { breakpoint -> breakpoint >= Breakpoint.MD }
+infix fun <T> T.atBreakpointSm(fallback: T): T =
+    selectByBreakpoint(this, fallback) { it >= Breakpoint.SM }
 
 /**
- * Returns the value of [this] if the current screen width is at least [Breakpoint.SM], otherwise returns the value of [other].
+ * Returns [this] value for screens at [Breakpoint.MD] or larger, otherwise returns [fallback].
  *
- * Both [first] and [other] must have the same type [T]
- *
- * @param other The value to be returned if the screen width is less than [Breakpoint.SM].
- * @return The value of [this] if the screen width is at least [Breakpoint.SM], otherwise the value of [other].
+ * Example: `24.px atBreakpointMd 16.px` returns 24px on MD+ screens, 16px on smaller.
  */
 @Composable
-infix fun <T> T.atBreakpointSM(other: T) =
-    breakpoint(this, other) { breakpoint -> breakpoint >= Breakpoint.SM }
+infix fun <T> T.atBreakpointMd(fallback: T): T =
+    selectByBreakpoint(this, fallback) { it >= Breakpoint.MD }
 
 /**
- * Returns the value of [this] if the current screen width is at least [Breakpoint.XL], otherwise returns the value of [other].
+ * Returns [this] value for screens at [Breakpoint.LG] or larger, otherwise returns [fallback].
  *
- * Both [first] and [other] must have the same type [T]
- *
- * @param other The value to be returned if the screen width is less than [Breakpoint.XL].
- * @return The value of [this] if the screen width is at least [Breakpoint.XL], otherwise the value of [other].
+ * Example: `4 atBreakpointLg 2` returns 4 on LG+ screens, 2 on smaller.
  */
 @Composable
-infix fun <T> T.atBreakpointXL(other: T) =
-    breakpoint(this, other) { breakpoint -> breakpoint >= Breakpoint.XL }
+infix fun <T> T.atBreakpointLg(fallback: T): T =
+    selectByBreakpoint(this, fallback) { it >= Breakpoint.LG }
 
 /**
- * Returns the value of [this] if the current screen width is at least [Breakpoint.LG], otherwise returns the value of [other].
+ * Returns [this] value for screens at [Breakpoint.XL] or larger, otherwise returns [fallback].
  *
- * Both [first] and [other] must have the same type [T]
- *
- * @param other The value to be returned if the screen width is less than [Breakpoint.LG].
- * @return The value of [this] if the screen width is at least [Breakpoint.LG], otherwise the value of [other].
+ * Example: `1200.px atBreakpointXl 100.percent` returns fixed width on XL+, full width on smaller.
  */
 @Composable
-infix fun <T> T.atBreakpointLG(other: T) =
-    breakpoint(this, other) { breakpoint -> breakpoint >= Breakpoint.LG }
+infix fun <T> T.atBreakpointXl(fallback: T): T =
+    selectByBreakpoint(this, fallback) { it >= Breakpoint.XL }

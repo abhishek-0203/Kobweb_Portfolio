@@ -1,6 +1,14 @@
 package com.mano.ashwa.data
 
-const val REPO_LINK = "https://github.com/abhishek-0203"
-//const val DISCORD_LINK = "https://discord.gg/invite/BySjRNQ9Je"
-//const val LINKEDIN_LINK = "https://www.linkedin.com/in/ashwani-kumar-singh-45577042/"
+/**
+ * External links and social media URLs.
+ */
+object SocialLinks {
+    const val GITHUB = "https://github.com/abhishek-0203"
+    const val LINKEDIN = "https://www.linkedin.com/in/abhishek-verma-196789379/"
+    const val EMAIL = "mailto:v.abhishek0203@gmail.com"
+}
 
+// Legacy constant for backward compatibility
+@Deprecated("Use SocialLinks.GITHUB instead", ReplaceWith("SocialLinks.GITHUB"))
+const val REPO_LINK = SocialLinks.GITHUB
