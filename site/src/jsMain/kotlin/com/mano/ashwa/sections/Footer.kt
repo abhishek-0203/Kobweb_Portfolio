@@ -686,7 +686,7 @@ private fun FooterBottom(isDark: Boolean) {
             FooterLink("Home", Routes.HOME, isDark)
             FooterLink("Skills", Routes.SKILL, isDark)
             FooterLink("Projects", Routes.PROJECT, isDark)
-            FooterLink("Experience", Routes.EXPERIENCE, isDark)
+            //FooterLink("Experience", Routes.EXPERIENCE, isDark)
         }
 
         // Social Icons
