@@ -1,1 +1,12 @@
+# Render Blueprint specification
+# https://render.com/docs/blueprint-spec
 
+services:
+  - type: web
+    name: kobweb-portfolio
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: "80"

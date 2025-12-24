@@ -3,13 +3,8 @@ FROM gradle:8.14-jdk17 AS builder
 
 WORKDIR /app
 
-# Copy Gradle configuration files first for caching
-COPY build.gradle.kts settings.gradle.kts gradle.properties ./
-COPY gradle ./gradle
-COPY site/build.gradle.kts ./site/
-
-# Copy source code
-COPY site/src ./site/src
+# Copy all project files (Gradle needs full project structure)
+COPY . .
 
 # Build the static export
 RUN cd site && gradle kobwebExport \
@@ -26,7 +21,24 @@ FROM nginx:alpine
 COPY --from=builder /app/site/build/kobweb/site /usr/share/nginx/html
 
 # Copy custom nginx config for SPA routing
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx-site.conf
+
+# Create nginx config that uses PORT env variable (Render requirement)
+RUN echo 'server { \
+    listen ${PORT:-80}; \
+    server_name localhost; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    gzip on; \
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript; \
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp)$ { \
+        expires 1y; \
+        add_header Cache-Control "public, immutable"; \
+    } \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+}' > /etc/nginx/templates/default.conf.template
 
 EXPOSE 80
 
