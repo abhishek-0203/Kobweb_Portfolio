@@ -1,0 +1,29 @@
+# Build outputs
+build/
+site/build/
+.gradle/
+.kobweb/
+
+# IDE
+.idea/
+*.iml
+
+# Node
+node_modules/
+kotlin-js-store/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local configuration
+local.properties
+
+# Documentation
+Doc/
+README.md
+
+# Git
+.git/
+.gitignore
+
