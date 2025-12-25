@@ -12,26 +12,40 @@ services:
       - key: GRADLE_OPTS
         value: "-Xmx2g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
     headers:
-      - path: /assets/*
+      - path: /system/*.js
         name: Cache-Control
         value: public, max-age=31536000, immutable
-      - path: /*.js
-        name: Cache-Control
-        value: public, max-age=31536000, immutable
-      - path: /*.css
-        name: Cache-Control
-        value: public, max-age=31536000, immutable
-      - path: /*.woff2
-        name: Cache-Control
-        value: public, max-age=31536000, immutable
-      - path: /*.woff
+      - path: /resources/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
       - path: /*
         name: Cache-Control
         value: public, max-age=3600
     routes:
-      # Fallback for client-side routing (SPA behavior)
+      # Serve the main index.html from system
+      - type: rewrite
+        source: /
+        destination: /system/index.html
+      # Serve page-specific pre-rendered HTML
+      - type: rewrite
+        source: /skill
+        destination: /pages/skill.html
+      - type: rewrite
+        source: /project
+        destination: /pages/project.html
+      - type: rewrite
+        source: /experiences
+        destination: /pages/experiences.html
+      - type: rewrite
+        source: /cover-letter
+        destination: /pages/cover-letter.html
+      - type: rewrite
+        source: /about
+        destination: /pages/about.html
+      - type: rewrite
+        source: /aboutme
+        destination: /pages/aboutme.html
+      # Fallback for any other routes
       - type: rewrite
         source: /*
-        destination: /index.html
+        destination: /system/index.html
