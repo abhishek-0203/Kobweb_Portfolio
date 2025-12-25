@@ -29,5 +29,6 @@ chmod +x gradlew
     --stacktrace
 
 echo "=== Build Complete ==="
-ls -la site/build/kobweb/site/
+echo "Contents of site/.kobweb/site:"
+ls -la site/.kobweb/site/
 
