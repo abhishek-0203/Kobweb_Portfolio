@@ -5,18 +5,11 @@ services:
   - type: web
     name: kobweb-portfolio
     runtime: static
-    buildCommand: |
-      # Install Java 17
-      curl -fsSL https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.tar.gz -o jdk.tar.gz
-      tar -xzf jdk.tar.gz
-      export JAVA_HOME=$PWD/jdk-17.0.12
-      export PATH=$JAVA_HOME/bin:$PATH
-      java -version
-      
-      # Build the static site
-      chmod +x gradlew
-      ./gradlew :site:kobwebExport -PkobwebReuseServer=false -PkobwebEnv=prod -PkobwebExportLayout=STATIC --no-daemon --stacktrace
+    buildCommand: ./build.sh
     staticPublishPath: site/build/kobweb/site
+    envVars:
+      - key: GRADLE_OPTS
+        value: "-Xmx2g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
     headers:
       - path: /assets/*
         name: Cache-Control
