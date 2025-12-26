@@ -6,7 +6,7 @@ services:
     name: kobweb-portfolio
     runtime: static
     buildCommand: ./build.sh
-    staticPublishPath: site/.kobweb/dist
+    staticPublishPath: public
     pullRequestPreviewsEnabled: true
     envVars:
       - key: GRADLE_OPTS
