@@ -26,17 +26,26 @@ chmod +x gradlew
 
 echo "=== Restructuring output for static hosting ==="
 # Create a flat structure for Render static hosting
-mkdir -p site/.kobweb/dist
+rm -rf public
+mkdir -p public
 
 # Copy system files (index.html, JS) to root
-cp site/.kobweb/site/system/index.html site/.kobweb/dist/
-cp site/.kobweb/site/system/ashwa.js site/.kobweb/dist/
-cp -f site/.kobweb/site/system/ashwa.js.map site/.kobweb/dist/ 2>/dev/null || true
+cp site/.kobweb/site/system/index.html public/
+cp site/.kobweb/site/system/ashwa.js public/
+cp -f site/.kobweb/site/system/ashwa.js.map public/ 2>/dev/null || true
 
 # Copy resources to root
-cp -r site/.kobweb/site/resources/* site/.kobweb/dist/ 2>/dev/null || true
+cp -r site/.kobweb/site/resources/* public/ 2>/dev/null || true
 
-# Copy pre-rendered pages as their own HTML files
+# Copy logo.png (use kobweb-logo.png if logo.png doesn't exist)
+if [ -f "public/logo.png" ]; then
+    echo "logo.png exists"
+elif [ -f "public/kobweb-logo.png" ]; then
+    cp public/kobweb-logo.png public/logo.png
+    echo "Created logo.png from kobweb-logo.png"
+fi
+
+# Copy pre-rendered pages as their own HTML files for clean URLs
 for page in site/.kobweb/site/pages/*.html; do
     if [ -f "$page" ]; then
         filename=$(basename "$page")
@@ -45,13 +54,16 @@ for page in site/.kobweb/site/pages/*.html; do
             # index.html already copied from system
             continue
         fi
-        # Create directory for the page and copy index.html for clean URLs
-        mkdir -p "site/.kobweb/dist/$pagename"
-        cp "$page" "site/.kobweb/dist/$pagename/index.html"
+        # Create directory for the page and copy as index.html for clean URLs
+        mkdir -p "public/$pagename"
+        cp "$page" "public/$pagename/index.html"
     fi
 done
 
 echo "=== Build Complete ==="
-echo "Contents of site/.kobweb/dist:"
-ls -la site/.kobweb/dist/
+echo "Contents of public:"
+ls -la public/
+echo ""
+echo "Subdirectories:"
+find public -type d | head -20
 
