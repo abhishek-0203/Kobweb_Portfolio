@@ -3,7 +3,7 @@
 
 services:
   - type: web
-    name: kobweb-portfolio
+    name: abhishek-portfolio
     runtime: static
     buildCommand: ./build.sh
     staticPublishPath: ./site/.kobweb/site
