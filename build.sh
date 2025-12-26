@@ -17,15 +17,41 @@ export GRADLE_OPTS="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
 echo "=== Building Kobweb Static Site ==="
 chmod +x gradlew
 
-# Clean and build the static site with static layout
+# Clean and build the static site
 ./gradlew :site:kobwebExport \
-    -Pkobweb.export.layout=STATIC \
     --no-daemon \
     --no-configuration-cache \
     -Dorg.gradle.jvmargs="-Xmx2g" \
     -Dkotlin.daemon.jvmargs="-Xmx1g"
 
+echo "=== Restructuring output for static hosting ==="
+# Create a flat structure for Render static hosting
+mkdir -p site/.kobweb/dist
+
+# Copy system files (index.html, JS) to root
+cp site/.kobweb/site/system/index.html site/.kobweb/dist/
+cp site/.kobweb/site/system/ashwa.js site/.kobweb/dist/
+cp -f site/.kobweb/site/system/ashwa.js.map site/.kobweb/dist/ 2>/dev/null || true
+
+# Copy resources to root
+cp -r site/.kobweb/site/resources/* site/.kobweb/dist/ 2>/dev/null || true
+
+# Copy pre-rendered pages as their own HTML files
+for page in site/.kobweb/site/pages/*.html; do
+    if [ -f "$page" ]; then
+        filename=$(basename "$page")
+        pagename="${filename%.html}"
+        if [ "$pagename" = "index" ]; then
+            # index.html already copied from system
+            continue
+        fi
+        # Create directory for the page and copy index.html for clean URLs
+        mkdir -p "site/.kobweb/dist/$pagename"
+        cp "$page" "site/.kobweb/dist/$pagename/index.html"
+    fi
+done
+
 echo "=== Build Complete ==="
-echo "Contents of site/.kobweb/site:"
-ls -la site/.kobweb/site/
+echo "Contents of site/.kobweb/dist:"
+ls -la site/.kobweb/dist/
 
