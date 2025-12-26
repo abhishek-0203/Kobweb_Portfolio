@@ -1,0 +1,20 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file '/Users/abhishek/KobwebProject/Kobweb_Portfolio/site/build.gradle.kts' line: 5
+
+* What went wrong:
+An exception occurred applying plugin request [id: 'com.varabyte.kobweb.application', version: '0.23.2']
+> Failed to apply plugin 'com.varabyte.kobweb.application'.
+   > No enum constant com.varabyte.kobweb.server.api.ServerEnvironment.prod
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 2s

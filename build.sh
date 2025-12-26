@@ -23,20 +23,26 @@ chmod +x gradlew
     -Dorg.gradle.jvmargs="-Xmx2g" \
     -Dkotlin.daemon.jvmargs="-Xmx1g"
 
-echo "=== Post-processing ==="
-# Copy logo.png if it doesn't exist (use kobweb-logo.png as fallback)
-if [ ! -f "site/.kobweb/site/resources/logo.png" ] && [ -f "site/.kobweb/site/resources/kobweb-logo.png" ]; then
-    cp site/.kobweb/site/resources/kobweb-logo.png site/.kobweb/site/resources/logo.png
+echo "=== Restructuring for static hosting ==="
+SITE_DIR="site/.kobweb/site"
+
+# Move index.html and JS from system/ to root
+cp "$SITE_DIR/system/index.html" "$SITE_DIR/"
+cp "$SITE_DIR/system/ashwa.js" "$SITE_DIR/"
+cp "$SITE_DIR/system/ashwa.js.map" "$SITE_DIR/" 2>/dev/null || true
+
+# Move resources to root level
+if [ -d "$SITE_DIR/resources" ]; then
+    cp -r "$SITE_DIR/resources/"* "$SITE_DIR/" 2>/dev/null || true
+fi
+
+# Create logo.png from kobweb-logo.png if needed
+if [ ! -f "$SITE_DIR/logo.png" ] && [ -f "$SITE_DIR/kobweb-logo.png" ]; then
+    cp "$SITE_DIR/kobweb-logo.png" "$SITE_DIR/logo.png"
     echo "Created logo.png from kobweb-logo.png"
 fi
 
 echo "=== Build Complete ==="
 echo "Contents of site/.kobweb/site:"
-ls -la site/.kobweb/site/
-echo ""
-echo "System folder:"
-ls -la site/.kobweb/site/system/
-echo ""
-echo "Pages folder:"
-ls -la site/.kobweb/site/pages/
+ls -la "$SITE_DIR/"
 
