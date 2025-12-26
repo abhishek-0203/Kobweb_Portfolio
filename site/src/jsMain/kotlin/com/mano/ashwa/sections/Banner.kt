@@ -324,7 +324,7 @@ fun BannerText(text: String, isDark: Boolean = true) {
                 Text("AI")
             }
             Text(" and ")
-            Span(attrs = { style { property("color", if (isDark) "#f472b6" else "#db2777"); property("font-weight", "600") } }) {
+            Span(attrs = { style { property("color", if (isDark) "#2dd4bf" else "#0d9488"); property("font-weight", "600") } }) {
                 Text("software development")
             }
             Text(", continuously learning ")
