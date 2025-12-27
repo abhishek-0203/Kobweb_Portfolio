@@ -434,6 +434,73 @@ private fun InjectNavbarStyles() {
             .navbar-toggler-icon {
                 filter: brightness(1.2) !important;
             }
+            
+            /* ============================================
+               Mobile Responsive Styles
+               ============================================ */
+            @media (max-width: 991px) {
+                .resume-download-btn {
+                    display: none !important;
+                }
+                
+                .navbar-brand {
+                    font-size: 0.9rem !important;
+                    padding: 8px 14px 8px 38px !important;
+                    letter-spacing: 1.5px !important;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .navbar-brand {
+                    font-size: 0.8rem !important;
+                    padding: 6px 12px 6px 32px !important;
+                    letter-spacing: 1px !important;
+                    left: 10px !important;
+                }
+                
+                .navbar-brand::before {
+                    left: 10px !important;
+                    font-size: 1rem !important;
+                }
+            }
+            
+            @media (max-width: 576px) {
+                .navbar-brand {
+                    font-size: 0.65rem !important;
+                    padding: 5px 8px 5px 24px !important;
+                    letter-spacing: 0.5px !important;
+                    left: 5px !important;
+                    border-width: 1px !important;
+                }
+                
+                .navbar-brand::before {
+                    left: 6px !important;
+                    font-size: 0.8rem !important;
+                }
+                
+                .navbar-toggler {
+                    padding: 4px 8px !important;
+                    margin-right: 5px !important;
+                }
+            }
+            
+            /* Theme Toggle Button Responsive */
+            @media (max-width: 991px) {
+                .theme-toggle-btn {
+                    right: 70px !important;
+                    width: 38px !important;
+                    height: 38px !important;
+                }
+            }
+            
+            @media (max-width: 576px) {
+                .theme-toggle-btn {
+                    right: 55px !important;
+                    width: 34px !important;
+                    height: 34px !important;
+                    border-radius: 8px !important;
+                }
+            }
             """.trimIndent()
         }
     }
@@ -447,6 +514,7 @@ private fun ThemeToggleButton(isDark: Boolean, onToggle: () -> Unit) {
 
     Button(attrs = {
         onClick { onToggle() }
+        attr("class", "theme-toggle-btn")
         style {
             property("position", "absolute")
             property("right", "220px")
